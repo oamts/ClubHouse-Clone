@@ -15,6 +15,76 @@ export default class RoomsController {
         this.#updateGlobalUserData(id)
     }
 
+    disconnect(socket) {
+        console.log('disconnect!!!', socket.id)
+        this.#logoutUser(socket)
+    }
+
+    #logoutUser(socket) {
+        const userId = socket.id
+        const user = this.#users.get(userId)
+        const roomId = user.roomId
+        // remover user da lista de usuarios ativos
+        this.#users.delete(userId)
+
+        // caso seja um usuario sujeira que estava em uma sala que não existe mais
+        if (!this.rooms.has(roomId)) {
+            return;
+        }
+
+        const room = this.rooms.get(roomId)
+        const toBeRemoved = [...room.users].find(({id}) => id === userId)
+
+        // removemos o usuario da sala
+        room.users.delete(toBeRemoved)
+
+        // se não tiver mais nenhum usuario na sala, matamos a sala
+        if (!room.users.size) {
+            this.rooms.delete(roomId)
+            return;
+        }
+
+        const disconnectedUserWasAnOwner = userId === room.owner.id
+        const onlyOneUserLeft = room.users.size === 1
+
+        // validar se tem somente um usuario ou se o usuario era o dono da sala
+        if (onlyOneUserLeft || disconnectedUserWasAnOwner) {
+            room.owner = this.#getNewRoomOwner(room, socket)
+        }
+
+        // atualiza a room no final
+        this.rooms.set(roomId, room)
+
+        // notifica a sala que o usuario se desconectou
+        socket.to(roomId).emit(constants.event.USER_DISCONNECTED, user)
+
+    }
+
+    #notifyUserProfileUpgrade(socket, roomId, user) {
+        socket.to(roomId).emit(constants.event.UPGRADE_USER_PERMISSION, user)
+    }
+
+    #getNewRoomOwner(room, socket) {
+        const users = [...room.users.values()]
+        const activerSpeakers = users.find(user => user.isSpeaker)
+        //se quem desconectou era o dono, passa a liderança para o próximo
+        //se não houver speakers, ele pega o attendee mais antigo (primeira posição)
+        const [newOwner] = activerSpeakers ? [activerSpeakers] : users
+        newOwner.isSpeaker = true
+
+        const outdatedUser = this.#users.get(newOwner.id)
+        const updatedUser = new Attendee({
+            ...outdatedUser,
+            ...newOwner,
+        })
+
+        this.#users.set(newOwner.id, updatedUser)
+
+        this.#notifyUserProfileUpgrade(socket, room.id, newOwner)
+
+        return newOwner
+    }
+
     joinRoom(socket, {user, room}) {
 
         const userId = user.id = socket.id
@@ -27,12 +97,12 @@ export default class RoomsController {
         this.#replyWithActiveUsers(socket, updatedRoom.users)
     }
 
-    #replyWithActiveUsers(socket, users){
+    #replyWithActiveUsers(socket, users) {
         const event = constants.event.LOBBY_UPDATED
         socket.emit(event, [...users.values()])
     }
 
-    #notifyUsersOnRoom(socket, roomId, user){
+    #notifyUsersOnRoom(socket, roomId, user) {
         const event = constants.event.USER_CONNECTED
         socket.to(roomId).emit(event, user)
     }
