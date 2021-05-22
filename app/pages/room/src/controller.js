@@ -28,7 +28,7 @@ export default class RoomController {
         this.view.configureOnMicrophoneActivation(this.onMicrophoneActivation())
         this.view.configureLeaveButton()
         this.view.configureClapButton(this.onClapPressed())
-        this.view.updateUserImage(this.roomInfo.user)
+        //this.view.updateUserImage(this.roomInfo.user)
         this.view.updateRoomTopic(this.roomInfo.room)
     }
 
@@ -183,5 +183,6 @@ export default class RoomController {
     highlightCurrentUser(){
         const currentUser = this.roomService.getCurrentUser()
         this.view.highlightUser(currentUser)
+        this.view.updateUserImage(currentUser)
     }
 }
