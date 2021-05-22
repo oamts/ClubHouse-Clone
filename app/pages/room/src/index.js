@@ -12,7 +12,7 @@ const urlData = keys.map(key => [key, urlParams.get(key)])
 
 const user = {
     img: 'https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-03/64/celebrity-matrix-trinity-256.png',
-    username: 'mts ' + Date.now()
+    username: 'guest ' + Date.now()
 }
 
 const roomInfo = {

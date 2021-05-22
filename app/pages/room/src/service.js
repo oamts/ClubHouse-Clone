@@ -76,6 +76,11 @@ export default class RoomService {
         this.currentUser = users.find(({peerId}) => peerId === this.currentPeer.id)
     }
 
+    highlightCurrentUser(){
+
+    }
+
+
     async getCurrentStream(){
         const { isSpeaker } = this.currentUser
         if(isSpeaker){

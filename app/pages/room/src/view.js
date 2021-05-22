@@ -151,4 +151,8 @@ export default class View {
         })
     }
 
+    static highlightUser({id}){
+        const roomCardUser = document.getElementById(id)
+        roomCardUser.classList.add('highlight')
+    }
 }

@@ -136,6 +136,7 @@ export default class RoomController {
             }
 
             this.activateUserFeatures()
+            this.highlightCurrentUser()
         }
     }
 
@@ -147,6 +148,7 @@ export default class RoomController {
             this.view.updateAttendeesOnGrid(data)
             this.roomService.updateCurrentUserProfile(users)
             this.activateUserFeatures()
+            this.highlightCurrentUser()
         }
     }
 
@@ -158,6 +160,7 @@ export default class RoomController {
             this.view.removeItemFromGrid(attendee.id)
 
             this.roomService.disconnectPeer(attendee)
+            this.highlightCurrentUser()
         }
     }
 
@@ -175,5 +178,10 @@ export default class RoomController {
     activateUserFeatures(){
         const currentUser = this.roomService.getCurrentUser()
         this.view.showUserFeatures(currentUser.isSpeaker)
+    }
+
+    highlightCurrentUser(){
+        const currentUser = this.roomService.getCurrentUser()
+        this.view.highlightUser(currentUser)
     }
 }

@@ -430,3 +430,19 @@ a {
   display: none;
 }
 audio { display:none;}
+
+.highlight {
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 4px #fff, 0 0 8px #fff, 0 0 12px cornflowerblue, 0 0 15px dodgerblue, 0 0 20px dodgerblue, 0 0 25px dodgerblue, 0 0 30px dodgerblue;
+  }
+  to {
+    text-shadow: 0 0 15px #fff, 0 0 12px cornflowerblue, 0 0 15px cornflowerblue, 0 0 20px cornflowerblue, 0 0 25px cornflowerblue, 0 0 30px cornflowerblue, 0 0 32px cornflowerblue;
+  }
+}

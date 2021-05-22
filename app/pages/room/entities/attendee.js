@@ -1,7 +1,7 @@
 export default class Attendee{
     constructor({id, username, img, isSpeaker, roomId, peerId}) {
         this.id = id
-        this.img = img || ""
+        this.img = `https://picsum.photos/seed/${id}/75/75`
         this.isSpeaker = isSpeaker
         this.roomId = roomId
         this.peerId = peerId
@@ -10,7 +10,7 @@ export default class Attendee{
         this.username = name
 
         const [firstName, lastName] = name.split(/\s/)
-        this.firstName = firstName + id
+        this.firstName = (new Chance(id).name({ nationality: 'it' }))
         this.lastName = lastName
     }
 }
