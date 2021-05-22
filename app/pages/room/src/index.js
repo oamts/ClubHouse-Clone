@@ -5,14 +5,15 @@ import View from "./view.js";
 import PeerBuilder from "../../_shared/peerBuilder.js";
 import RoomService from "./service.js";
 import Media from "../../_shared/media.js";
+import UserDb from "../../_shared/userDb.js";
 
 const urlParams = new URLSearchParams(window.location.search)
 const keys = ['id', 'topic']
 const urlData = keys.map(key => [key, urlParams.get(key)])
 
-const user = {
-    img: 'https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-03/64/celebrity-matrix-trinity-256.png',
-    username: 'guest ' + Date.now()
+const user = UserDb.get()
+if(!Object.keys(user).length){
+    View.redirectToLogin()
 }
 
 const roomInfo = {

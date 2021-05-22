@@ -26,5 +26,15 @@ export const constants = {
 
         SPEAK_REQUEST: 'speakRequest',
         SPEAK_ANSWER: 'speakAnswer',
-    }
+    },
+    firebaseConfig: {
+        apiKey: "AIzaSyDEzcQlJZhXD_wnuklNmMjSVW-CWyte298",
+        authDomain: "clubhouse-clone-99624.firebaseapp.com",
+        projectId: "clubhouse-clone-99624",
+        storageBucket: "clubhouse-clone-99624.appspot.com",
+        messagingSenderId: "941233484036",
+        appId: "1:941233484036:web:8c6d334c2c105db7832051",
+        measurementId: "G-1105NHW83G"
+    },
+    storageKey: 'jsexpert:storage:user'
 }

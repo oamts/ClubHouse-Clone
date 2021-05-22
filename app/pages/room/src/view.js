@@ -13,6 +13,10 @@ const toggleImage = document.getElementById('toggleImage')
 const btnLeave = document.getElementById('btnLeave')
 
 export default class View {
+    static redirectToLogin(){
+        window.location = constants.pages.login
+    }
+
     static updateUserImage({img, username}) {
         imgUser.src = img
         imgUser.alt = username
@@ -155,4 +159,6 @@ export default class View {
         const roomCardUser = document.getElementById(id)
         roomCardUser.classList.add('highlight')
     }
+
+
 }

@@ -2,10 +2,11 @@ import LobbySocketBuilder from "./util/lobbySocketBuilder.js";
 import {constants} from "../../_shared/constants.js";
 import LobbyController from "./controller.js";
 import View from "./view.js";
+import UserDb from "../../_shared/userDb.js";
 
-const user = {
-    img: 'https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-03/64/celebrity-matrix-trinity-256.png',
-    username: 'guest ' + Date.now()
+const user = UserDb.get()
+if(!Object.keys(user).length){
+    View.redirectToLogin()
 }
 
 const socketBuilder = new LobbySocketBuilder({
