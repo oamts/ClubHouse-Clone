@@ -12,7 +12,7 @@ export default class Room {
     ) {
         this.id = id
         this.topic = topic
-        this.subTopic = subTopic || 'Semana JS Expert 4.0'
+        this.subTopic = subTopic || 'Open Room'
         this.roomLink = roomLink
         this.attendeesCount = attendeesCount
         this.speakersCount = speakersCount

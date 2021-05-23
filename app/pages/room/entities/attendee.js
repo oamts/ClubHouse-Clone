@@ -12,7 +12,7 @@ export default class Attendee{
 
         const [firstName, lastName] = name.split(/\s/)
         //this.firstName = (new Chance(id).name({ nationality: 'it' }))
-        this.firstName = firstName
+        this.firstName = img.includes('github') ? firstName:  (new Chance(id).name())
         this.lastName = lastName
     }
 }

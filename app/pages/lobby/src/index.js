@@ -4,10 +4,12 @@ import LobbyController from "./controller.js";
 import View from "./view.js";
 import UserDb from "../../_shared/userDb.js";
 
-const user = UserDb.get()
-if(!Object.keys(user).length){
-    View.redirectToLogin()
-}
+const user = Object.keys(UserDb.get()).length
+    ? UserDb.get()
+    :   {
+        img: 'https://cdn4.iconfinder.com/data/icons/toys-childhood-12/60/robot__face__toy__kids__play-256.png',
+        username: 'guest ' + Date.now()
+    }
 
 const socketBuilder = new LobbySocketBuilder({
     socketUrl: constants.socketUrl,

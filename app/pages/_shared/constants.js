@@ -1,8 +1,8 @@
 export const constants = {
     // todo dev
-    //socketUrl: 'http://localhost:3000',
+    socketUrl: 'http://localhost:3000',
     // todo prod
-    socketUrl: 'https://vast-depths-36236.herokuapp.com',
+    //socketUrl: 'https://vast-depths-36236.herokuapp.com',
     socketNamespaces: {
         room: 'room',
         lobby: 'lobby'
