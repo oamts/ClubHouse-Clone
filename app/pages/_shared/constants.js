@@ -1,16 +1,22 @@
 export const constants = {
+    // todo dev
     socketUrl: 'http://localhost:3000',
+    // todo prod
+    //socketUrl: 'https://vast-depths-36236.herokuapp.com',
     socketNamespaces: {
         room: 'room',
         lobby: 'lobby'
     },
     peerConfig: Object.values({
         id: undefined,
-        /*config: {
-            port: 9000,
-            host: 'localhost',
+        // todo dev
+        //
+        // todo prod
+        config: {
+            host: 'mts-peerjs-server.herokuapp.com',
+            secure: true,
             path: '/'
-        }*/
+        }
     }),
     pages: {
         lobby: '/pages/lobby',

@@ -1,8 +1,6 @@
-# ClubHouse Clone Template - Semana JS Expert 4.0
+# ClubHouse Clone - Semana JS Expert 4.0
 
-Seja bem vindo(a) à quarta Semana Javascript Expert.Este é o código inicial para iniciar nossa jornada.
-
-Marque esse projeto com uma estrela 🌟
+url: https://clubhouse-clone.herokuapp.com/
 
 ## Preview
 
@@ -20,7 +18,7 @@ Marque esse projeto com uma estrela 🌟
 
 ## Checklist Features
 
-- [ ] O app deve funcionar na Web, Android e IOS
+- [x] O app deve funcionar na Web, Android e IOS
 - Login
   - [x] Deve ter login com GitHub
     - [x] Se houver dados do usuario em localStorage deve ir para lobby direto
